@@ -1,0 +1,23 @@
+﻿@model Test1.Models.Portfolio
+
+<h2>Удалить этот файл?</h2>
+<dl>
+    <dt>Название</dt>
+    <dd>
+        @Html.DisplayFor(model => model.FileName)
+    </dd>
+
+    <dt>Файл</dt>
+    <dd>
+        <a href="~/files/portfolio_files/@Html.DisplayFor(m => m.FileLink)">@Html.DisplayFor(m => m.FileLink)</a>
+    </dd>
+
+    <dt>Дата и время</dt>
+    <dd>
+        @Html.DisplayFor(model => model.DateOfUpload)
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+<input class = "btn btn-danger btn-sm" type="submit" value="Удалить" />}

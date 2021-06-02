@@ -1,0 +1,36 @@
+﻿
+@model IEnumerable<Test1.Models.Portfolio>
+
+<h2>Портфолио @Html.ActionLink("Загрузить", "Upload", "Home", null, new { @class = "btn btn-primary btn-sm" }) </h2>
+<table class="table table-sm">
+    <tr class="table-primary">
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Файл</th>
+        <th>Дата загрузки</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.OrderByDescending(o => o.DateOfUpload))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                <a href="~/files/portfolio_files/@Html.DisplayFor(modelItem => item.FileLink)">@Html.DisplayFor(modelItem => item.FileLink)</a>
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.DateOfBirth)*@
+                @Convert.ToDateTime(item.DateOfUpload).ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @*@Html.ActionLink("Удалить", "Delete", "Home", null, new { @class = "btn btn-primary btn-sm" })*@
+                @Html.ActionLink("Удалить", "Delete", new { id = item.PortfolioId }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+</table>
+

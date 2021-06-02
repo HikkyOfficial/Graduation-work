@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Test1.Models.Attestation>
+@if ((string)Session["course"] == "0" || (string)Session["course"] == null)
+{<h2>Успеваемость</h2>}
+else if ((string)Session["course"] != "0")
+{<h2>Успеваемость за @Session["course"] семестр</h2>}
+
+@using (Html.BeginForm("Progress", "Home", FormMethod.Post))
+{
+    <label for="course">Семестр:</label>
+    <select name="course">
+        <option value="0">Все семестры</option>
+        <option value="1">1 семестр</option>
+        <option value="2">2 семестр</option>
+        <option value="3">3 семестр</option>
+        <option value="4">4 семестр</option>
+        <option value="5">5 семестр</option>
+        <option value="6">6 семестр</option>
+        <option value="7">7 семестр</option>
+        <option value="8">8 семестр</option>
+    </select>
+    <input type="submit" value="Отфильтровать" class="btn btn-primary btn-sm" />
+}
+
+<table class="table table-sm">
+    <tr class="table-primary">
+        <th>Дисциплина</th>
+        <th>Форма</th>
+        <th>Семестр</th>
+        <th>Результат</th>
+        <th>Баллы</th>
+        <th>ECTS</th>
+        <th>Дата</th>
+        <th>Преподаватель</th>
+    </tr>
+    @foreach (var item in Model.OrderByDescending(o => o.Semester))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discipline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Form)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Semester)
+            </td>
+            @if(item.DateOfGrading == null)
+                {
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                }
+            else if(item.DateOfGrading != null)
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Result)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Score)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ECTS)</td>
+                    <td>@Convert.ToDateTime(item.DateOfGrading).ToString("dd/MM/yyyy")</td>
+                    <td>@Html.DisplayFor(modelItem => item.TeacherName)</td>
+                }
+
+        </tr>
+    }
+</table>

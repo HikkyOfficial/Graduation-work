@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "About";
+    //Layout = "/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<Test1.Models.Student>
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+
+<h2>Студентота</h2>
+<table class="table table-sm">
+    <tr class="table-primary">
+        <th>Id</th>
+        <th>ФИО</th>
+        <th>Дата рождения</th>
+        <th>Группа</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.DateOfBirth)*@
+                @Convert.ToDateTime(item.DateOfBirth).ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.GroupId)
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Каталог команд", "ListTeams")
+</p>

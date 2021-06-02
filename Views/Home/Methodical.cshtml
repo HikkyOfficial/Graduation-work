@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Test1.Models.StudyingPlan>
+
+<h2>Методическое обеспечение</h2>
+<div>
+    <table class="table table-sm">
+        <tr class="table-primary">
+            <th>Файл</th>
+        </tr>
+        <tr>
+            @foreach (var item in Model)
+            {
+                <th>
+                    @if (item.File1 != null)
+                    {
+                        <p><a href="~/files/support_files/@Html.DisplayFor(modelItem => item.File1)">@Html.DisplayFor(modelItem => item.File1)</a></p>
+                    }
+                    @if (item.File2 != null)
+                    {
+                        <p><a href="~/files/support_files/@Html.DisplayFor(modelItem => item.File2)">@Html.DisplayFor(modelItem => item.File2)</a></p>
+                    }
+                    @if (item.File3 != null)
+                    {
+                        <p><a href="~/files/support_files/@Html.DisplayFor(modelItem => item.File3)">@Html.DisplayFor(modelItem => item.File3)</a></p>
+                    }
+                    @if (item.File4 != null)
+                    {
+                        <p><a href="~/files/support_files/@Html.DisplayFor(modelItem => item.File4)">@Html.DisplayFor(modelItem => item.File4)</a></p>
+                    }
+                    @if (item.File5 != null)
+                    {
+                        <p><a href="~/files/support_files/@Html.DisplayFor(modelItem => item.File5)">@Html.DisplayFor(modelItem => item.File5)</a></p>
+                    }
+                    <p><a href="~/files/common_files/Рекомендации по подготовке и защите ВКР.pdf">Рекомендации по подготовке и защите ВКР.pdf</a></p>
+                    <p><a href="~/files/common_files/Рекомендации по подготовке курсовых работ.pdf">Рекомендации по подготовке курсовых работ.pdf</a></p>
+                </th>
+            }
+        </tr>
+    </table>
+</div>
